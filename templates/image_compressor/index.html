@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Image Compressor — Smart File Toolkit{% endblock %}
+
+{% block content %}
+<section class="tool-page">
+  <div class="tool-page-header">
+    <div class="tool-page-icon tool-icon-teal">
+      <i data-feather="compress"></i>
+    </div>
+    <div>
+      <div class="breadcrumb"><a href="{% url 'home' %}">Dashboard</a> <i data-feather="chevron-right"></i> Image Compressor</div>
+      <h1>Image Compressor</h1>
+      <p class="tool-page-desc">Reduce image file size with full quality control. Live preview shows your original image before compressing.</p>
+    </div>
+  </div>
+
+  <div class="tool-workspace">
+
+    <div class="upload-section" id="uploadSection">
+      <div class="dropzone" id="dropzone" data-accept="image/*">
+        <div class="dropzone-icon"><i data-feather="upload-cloud"></i></div>
+        <h3>Drop your image here</h3>
+        <p>or <label for="fileInput" class="file-label">browse files</label></p>
+        <p class="dropzone-hint">JPG, PNG, WEBP, BMP · Max 30MB</p>
+        <input type="file" id="fileInput" accept="image/*" hidden />
+      </div>
+
+      <!-- IMAGE PREVIEW -->
+      <div class="image-preview-wrapper" id="imagePreviewWrapper" style="display:none">
+        <div class="preview-label">Preview</div>
+        <div class="image-preview-container">
+          <img id="imagePreview" src="#" alt="Preview" />
+          <div class="preview-overlay">
+            <button class="btn btn-sm btn-ghost" id="clearAll">
+              <i data-feather="x"></i> Remove
+            </button>
+          </div>
+        </div>
+        <div class="file-info" id="fileInfoBar"></div>
+      </div>
+
+      <!-- QUALITY SLIDER -->
+      <div class="quality-control" id="qualityControl" style="display:none">
+        <div class="quality-header">
+          <div>
+            <h4>Compression Quality</h4>
+            <p>Drag to balance quality and file size</p>
+          </div>
+          <div class="quality-value-badge" id="qualityBadge">75%</div>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">Smaller<br>File</span>
+          <input type="range" id="qualitySlider" min="5" max="99" value="75" class="quality-slider" />
+          <span class="slider-label text-right">Best<br>Quality</span>
+        </div>
+        <div class="quality-presets">
+          <button class="preset-btn" data-value="25">Max Compress</button>
+          <button class="preset-btn active" data-value="75">Balanced</button>
+          <button class="preset-btn" data-value="95">High Quality</button>
+        </div>
+      </div>
+
+      <div class="action-bar" id="actionBar" style="display:none">
+        <button class="btn btn-primary btn-lg btn-full" id="convertBtn">
+          <i data-feather="compress"></i> Compress Image
+        </button>
+      </div>
+    </div>
+
+    <div class="processing-section" id="processingSection" style="display:none">
+      <div class="processing-animation">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring spinner-ring-2"></div>
+      </div>
+      <h3>Compressing Image…</h3>
+      <p id="processingMsg">Optimizing your image, please wait.</p>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="result-section" id="resultSection" style="display:none">
+      <div class="result-icon success-icon"><i data-feather="check-circle"></i></div>
+      <h3>Image Compressed!</h3>
+      <div class="result-stats" id="resultStats"></div>
+      <div class="compression-visual" id="compressionVisual"></div>
+      <div class="result-actions">
+        <a href="#" class="btn btn-primary btn-lg" id="downloadBtn">
+          <i data-feather="download"></i> Download Image
+        </a>
+        <button class="btn btn-ghost btn-lg" id="convertAnother">
+          <i data-feather="refresh-cw"></i> Compress Another
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="how-it-works">
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>Upload an image</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">2</div><p>Adjust quality slider</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><p>Download compressed image</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const CONVERT_URL = "{% url 'image_compressor_compress' %}";
+const DOWNLOAD_BASE = "{% url 'image_compressor_download' filename='__FILENAME__' %}";
+const CSRF_TOKEN = "{{ csrf_token }}";
+const TOOL_TYPE = "image-compressor";
+</script>
+{% endblock %}

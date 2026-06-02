@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Smart File Toolkit — Professional File Tools{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <i data-feather="zap"></i>
+      <span>Free · Fast · Secure</span>
+    </div>
+    <h1 class="hero-title">
+      Transform Your Files<br />
+      <span class="hero-title-accent">Instantly</span>
+    </h1>
+    <p class="hero-subtitle">
+      Professional-grade file conversion and compression tools.<br />
+      No uploads to external servers. Everything runs locally.
+    </p>
+    <div class="hero-cta">
+      <a href="#tools" class="btn btn-primary btn-lg">
+        <i data-feather="grid"></i> Explore Tools
+      </a>
+      <a href="{% url 'about' %}" class="btn btn-ghost btn-lg">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Powerful Tools</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">50MB</span>
+        <span class="stat-label">Max File Size</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Free to Use</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS GRID -->
+<section class="tools-section" id="tools">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">All Tools</p>
+      <h2 class="section-title">Choose Your Tool</h2>
+      <p class="section-desc">Every tool you need for your documents and images, in one place.</p>
+    </div>
+
+    <div class="tools-grid">
+
+      <!-- Tool 1: Photo to PDF -->
+      <a href="{% url 'photo_to_pdf' %}" class="tool-card" data-tool="photo-to-pdf">
+        <div class="tool-card-glow"></div>
+        <div class="tool-card-inner">
+          <div class="tool-icon tool-icon-blue">
+            <i data-feather="image"></i>
+          </div>
+          <div class="tool-badge">Popular</div>
+          <h3 class="tool-name">Photo to PDF</h3>
+          <p class="tool-desc">Convert JPG, PNG, WEBP images into a professional PDF document. Supports multiple images at once.</p>
+          <div class="tool-tags">
+            <span>JPG</span><span>PNG</span><span>WEBP</span><span>→ PDF</span>
+          </div>
+          <div class="tool-cta">
+            Open Tool <i data-feather="arrow-right"></i>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tool 2: PDF Merger -->
+      <a href="{% url 'pdf_merger' %}" class="tool-card" data-tool="pdf-merger">
+        <div class="tool-card-glow"></div>
+        <div class="tool-card-inner">
+          <div class="tool-icon tool-icon-purple">
+            <i data-feather="git-merge"></i>
+          </div>
+          <h3 class="tool-name">PDF Merger</h3>
+          <p class="tool-desc">Combine multiple PDF files into one seamlessly. Drag to reorder pages before merging.</p>
+          <div class="tool-tags">
+            <span>Multiple PDFs</span><span>→ Single PDF</span>
+          </div>
+          <div class="tool-cta">
+            Open Tool <i data-feather="arrow-right"></i>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tool 3: PDF Compressor -->
+      <a href="{% url 'pdf_compressor' %}" class="tool-card" data-tool="pdf-compressor">
+        <div class="tool-card-glow"></div>
+        <div class="tool-card-inner">
+          <div class="tool-icon tool-icon-gold">
+            <i data-feather="minimize-2"></i>
+          </div>
+          <h3 class="tool-name">PDF Compressor</h3>
+          <p class="tool-desc">Reduce PDF file size by up to 80% without losing important content or readability.</p>
+          <div class="tool-tags">
+            <span>Size Reduction</span><span>PDF Optimize</span>
+          </div>
+          <div class="tool-cta">
+            Open Tool <i data-feather="arrow-right"></i>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tool 4: Image Compressor -->
+      <a href="{% url 'image_compressor' %}" class="tool-card" data-tool="image-compressor">
+        <div class="tool-card-glow"></div>
+        <div class="tool-card-inner">
+          <div class="tool-icon tool-icon-teal">
+            <i data-feather="compress"></i>
+          </div>
+          <h3 class="tool-name">Image Compressor</h3>
+          <p class="tool-desc">Compress images with precision quality control. Choose your quality-to-size balance with our live slider.</p>
+          <div class="tool-tags">
+            <span>JPG</span><span>PNG</span><span>WEBP</span><span>Quality Control</span>
+          </div>
+          <div class="tool-cta">
+            Open Tool <i data-feather="arrow-right"></i>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<section class="features-strip">
+  <div class="section-inner">
+    <div class="feature-item">
+      <div class="feature-icon"><i data-feather="shield"></i></div>
+      <div class="feature-text">
+        <h4>Secure Processing</h4>
+        <p>Files processed locally. Auto-deleted after download.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon"><i data-feather="zap"></i></div>
+      <div class="feature-text">
+        <h4>Lightning Fast</h4>
+        <p>Optimized algorithms for instant results.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon"><i data-feather="smartphone"></i></div>
+      <div class="feature-text">
+        <h4>Mobile Friendly</h4>
+        <p>Works perfectly on all devices and screen sizes.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon"><i data-feather="gift"></i></div>
+      <div class="feature-text">
+        <h4>Completely Free</h4>
+        <p>No subscriptions, no limits, no credit card.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

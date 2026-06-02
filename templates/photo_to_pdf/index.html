@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Photo to PDF Converter — Smart File Toolkit{% endblock %}
+
+{% block content %}
+<section class="tool-page">
+  <div class="tool-page-header">
+    <div class="tool-page-icon tool-icon-blue">
+      <i data-feather="image"></i>
+    </div>
+    <div>
+      <div class="breadcrumb"><a href="{% url 'home' %}">Dashboard</a> <i data-feather="chevron-right"></i> Photo to PDF</div>
+      <h1>Photo to PDF Converter</h1>
+      <p class="tool-page-desc">Upload multiple images and convert them into a single, beautifully formatted PDF document.</p>
+    </div>
+  </div>
+
+  <div class="tool-workspace">
+
+    <!-- UPLOAD AREA -->
+    <div class="upload-section" id="uploadSection">
+      <div class="dropzone" id="dropzone" data-accept="image/*">
+        <div class="dropzone-icon"><i data-feather="upload-cloud"></i></div>
+        <h3>Drop images here</h3>
+        <p>or <label for="fileInput" class="file-label">browse files</label></p>
+        <p class="dropzone-hint">JPG, PNG, WEBP, BMP, GIF · Up to 20 images · 20MB each</p>
+        <input type="file" id="fileInput" accept="image/*" multiple hidden />
+      </div>
+
+      <!-- FILE LIST -->
+      <div class="file-list-wrapper" id="fileListWrapper" style="display:none">
+        <div class="file-list-header">
+          <h4>Selected Images (<span id="fileCount">0</span>)</h4>
+          <button class="btn btn-sm btn-ghost" id="clearAll">Clear All</button>
+        </div>
+        <div class="file-list" id="fileList"></div>
+        <div class="file-list-actions">
+          <label for="fileInput" class="btn btn-ghost btn-sm">
+            <i data-feather="plus"></i> Add More
+          </label>
+        </div>
+      </div>
+
+      <!-- CONVERT BUTTON -->
+      <div class="action-bar" id="actionBar" style="display:none">
+        <button class="btn btn-primary btn-lg btn-full" id="convertBtn">
+          <i data-feather="file-text"></i>
+          Convert to PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- PROCESSING -->
+    <div class="processing-section" id="processingSection" style="display:none">
+      <div class="processing-animation">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring spinner-ring-2"></div>
+      </div>
+      <h3>Converting Images to PDF…</h3>
+      <p id="processingMsg">Processing your images, please wait.</p>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-section" id="resultSection" style="display:none">
+      <div class="result-icon success-icon"><i data-feather="check-circle"></i></div>
+      <h3>PDF Created Successfully!</h3>
+      <div class="result-stats" id="resultStats"></div>
+      <div class="result-actions">
+        <a href="#" class="btn btn-primary btn-lg" id="downloadBtn">
+          <i data-feather="download"></i> Download PDF
+        </a>
+        <button class="btn btn-ghost btn-lg" id="convertAnother">
+          <i data-feather="refresh-cw"></i> Convert Another
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works">
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>Upload your images</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">2</div><p>Click Convert</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><p>Download your PDF</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const CONVERT_URL = "{% url 'photo_to_pdf_convert' %}";
+const DOWNLOAD_BASE = "{% url 'photo_to_pdf_download' filename='__FILENAME__' %}";
+const CSRF_TOKEN = "{{ csrf_token }}";
+const TOOL_TYPE = "photo-to-pdf";
+</script>
+{% endblock %}

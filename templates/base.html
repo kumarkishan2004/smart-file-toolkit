@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Smart File Toolkit{% endblock %}</title>
+  <meta name="description" content="Professional file conversion and compression tools. Convert photos to PDF, merge PDFs, compress files instantly." />
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="{% url 'home' %}" class="nav-brand">
+      <div class="brand-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M4 6C4 4.9 4.9 4 6 4h10l8 8v10c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V6z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M14 4v8h8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M8 17l3 3 5-6" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="brand-name">Smart<span class="brand-accent">File</span> Toolkit</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Dashboard</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-link">Tools <i data-feather="chevron-down" class="nav-chevron"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'photo_to_pdf' %}"><i data-feather="image"></i> Photo to PDF</a></li>
+          <li><a href="{% url 'pdf_merger' %}"><i data-feather="git-merge"></i> PDF Merger</a></li>
+          <li><a href="{% url 'pdf_compressor' %}"><i data-feather="minimize-2"></i> PDF Compressor</a></li>
+          <li><a href="{% url 'image_compressor' %}"><i data-feather="compress"></i> Image Compressor</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
+      <li><a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+    </ul>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="{% url 'home' %}">Dashboard</a>
+  <a href="{% url 'photo_to_pdf' %}">Photo to PDF</a>
+  <a href="{% url 'pdf_merger' %}">PDF Merger</a>
+  <a href="{% url 'pdf_compressor' %}">PDF Compressor</a>
+  <a href="{% url 'image_compressor' %}">Image Compressor</a>
+  <a href="{% url 'about' %}">About</a>
+  <a href="{% url 'contact' %}">Contact</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">Smart<span class="brand-accent">File</span> Toolkit</span>
+      <p>Professional file tools. Fast, secure, free.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="{% url 'photo_to_pdf' %}">Photo to PDF</a>
+        <a href="{% url 'pdf_merger' %}">PDF Merger</a>
+        <a href="{% url 'pdf_compressor' %}">PDF Compressor</a>
+        <a href="{% url 'image_compressor' %}">Image Compressor</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Smart File Toolkit. Built with ♦ for productivity.</p>
+  </div>
+</footer>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

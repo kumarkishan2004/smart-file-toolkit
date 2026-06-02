@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PDF Merger — Smart File Toolkit{% endblock %}
+
+{% block content %}
+<section class="tool-page">
+  <div class="tool-page-header">
+    <div class="tool-page-icon tool-icon-purple">
+      <i data-feather="git-merge"></i>
+    </div>
+    <div>
+      <div class="breadcrumb"><a href="{% url 'home' %}">Dashboard</a> <i data-feather="chevron-right"></i> PDF Merger</div>
+      <h1>PDF Merger</h1>
+      <p class="tool-page-desc">Combine multiple PDF files into one seamless document. Upload at least 2 PDFs to get started.</p>
+    </div>
+  </div>
+
+  <div class="tool-workspace">
+
+    <div class="upload-section" id="uploadSection">
+      <div class="dropzone" id="dropzone" data-accept=".pdf">
+        <div class="dropzone-icon"><i data-feather="upload-cloud"></i></div>
+        <h3>Drop PDF files here</h3>
+        <p>or <label for="fileInput" class="file-label">browse files</label></p>
+        <p class="dropzone-hint">PDF files only · Up to 20 files · 50MB each</p>
+        <input type="file" id="fileInput" accept=".pdf,application/pdf" multiple hidden />
+      </div>
+
+      <div class="file-list-wrapper" id="fileListWrapper" style="display:none">
+        <div class="file-list-header">
+          <h4>PDF Files (<span id="fileCount">0</span>)</h4>
+          <div class="file-list-header-actions">
+            <span class="hint-text"><i data-feather="move"></i> Drag to reorder</span>
+            <button class="btn btn-sm btn-ghost" id="clearAll">Clear All</button>
+          </div>
+        </div>
+        <div class="file-list sortable-list" id="fileList"></div>
+        <div class="file-list-actions">
+          <label for="fileInput" class="btn btn-ghost btn-sm">
+            <i data-feather="plus"></i> Add More PDFs
+          </label>
+        </div>
+      </div>
+
+      <div class="action-bar" id="actionBar" style="display:none">
+        <button class="btn btn-primary btn-lg btn-full" id="convertBtn">
+          <i data-feather="git-merge"></i> Merge PDFs
+        </button>
+      </div>
+    </div>
+
+    <div class="processing-section" id="processingSection" style="display:none">
+      <div class="processing-animation">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring spinner-ring-2"></div>
+      </div>
+      <h3>Merging PDF Files…</h3>
+      <p id="processingMsg">Combining your documents, please wait.</p>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="result-section" id="resultSection" style="display:none">
+      <div class="result-icon success-icon"><i data-feather="check-circle"></i></div>
+      <h3>PDFs Merged Successfully!</h3>
+      <div class="result-stats" id="resultStats"></div>
+      <div class="result-actions">
+        <a href="#" class="btn btn-primary btn-lg" id="downloadBtn">
+          <i data-feather="download"></i> Download Merged PDF
+        </a>
+        <button class="btn btn-ghost btn-lg" id="convertAnother">
+          <i data-feather="refresh-cw"></i> Merge More Files
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>Upload 2+ PDFs</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">2</div><p>Reorder if needed</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><p>Download merged PDF</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const CONVERT_URL = "{% url 'pdf_merger_merge' %}";
+const DOWNLOAD_BASE = "{% url 'pdf_merger_download' filename='__FILENAME__' %}";
+const CSRF_TOKEN = "{{ csrf_token }}";
+const TOOL_TYPE = "pdf-merger";
+</script>
+{% endblock %}

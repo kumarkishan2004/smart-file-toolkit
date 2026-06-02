@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About — Smart File Toolkit{% endblock %}
+{% block content %}
+<section class="simple-page">
+  <div class="simple-page-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">About Us</p>
+      <h1 class="section-title">Smart File Toolkit</h1>
+      <p class="section-desc">Built for people who need powerful file tools without the bloat.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="tool-icon tool-icon-blue"><i data-feather="lock"></i></div>
+        <h3>Privacy First</h3>
+        <p>Your files are processed on your own server and automatically deleted after download. We never store or analyze your documents.</p>
+      </div>
+      <div class="about-card">
+        <div class="tool-icon tool-icon-purple"><i data-feather="code"></i></div>
+        <h3>Open Technology</h3>
+        <p>Built with Django, Pillow, and pypdf — battle-tested open-source libraries trusted by millions of developers worldwide.</p>
+      </div>
+      <div class="about-card">
+        <div class="tool-icon tool-icon-gold"><i data-feather="target"></i></div>
+        <h3>Purpose Built</h3>
+        <p>Every feature is carefully designed for a specific task. No feature creep, no bloat — just the tools you actually need.</p>
+      </div>
+      <div class="about-card">
+        <div class="tool-icon tool-icon-teal"><i data-feather="globe"></i></div>
+        <h3>Works Everywhere</h3>
+        <p>Fully responsive design that works seamlessly on desktop, tablet, and mobile. Your files, your device, your choice.</p>
+      </div>
+    </div>
+    <div class="cta-section">
+      <h2>Ready to get started?</h2>
+      <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+        <i data-feather="grid"></i> Explore Tools
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

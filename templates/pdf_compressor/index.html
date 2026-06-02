@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PDF Compressor — Smart File Toolkit{% endblock %}
+
+{% block content %}
+<section class="tool-page">
+  <div class="tool-page-header">
+    <div class="tool-page-icon tool-icon-gold">
+      <i data-feather="minimize-2"></i>
+    </div>
+    <div>
+      <div class="breadcrumb"><a href="{% url 'home' %}">Dashboard</a> <i data-feather="chevron-right"></i> PDF Compressor</div>
+      <h1>PDF Compressor</h1>
+      <p class="tool-page-desc">Reduce your PDF file size by optimizing embedded images. Choose your compression level.</p>
+    </div>
+  </div>
+
+  <div class="tool-workspace">
+
+    <div class="upload-section" id="uploadSection">
+      <div class="dropzone" id="dropzone" data-accept=".pdf">
+        <div class="dropzone-icon"><i data-feather="upload-cloud"></i></div>
+        <h3>Drop your PDF here</h3>
+        <p>or <label for="fileInput" class="file-label">browse files</label></p>
+        <p class="dropzone-hint">PDF files only · Max 100MB</p>
+        <input type="file" id="fileInput" accept=".pdf,application/pdf" hidden />
+      </div>
+
+      <div class="file-list-wrapper" id="fileListWrapper" style="display:none">
+        <div class="file-list-header">
+          <h4>Selected File</h4>
+          <button class="btn btn-sm btn-ghost" id="clearAll">Remove</button>
+        </div>
+        <div class="file-list" id="fileList"></div>
+      </div>
+
+      <!-- QUALITY SLIDER -->
+      <div class="quality-control" id="qualityControl" style="display:none">
+        <div class="quality-header">
+          <div>
+            <h4>Compression Quality</h4>
+            <p>Lower quality = smaller file size</p>
+          </div>
+          <div class="quality-value-badge" id="qualityBadge">60%</div>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">Maximum<br>Compression</span>
+          <input type="range" id="qualitySlider" min="10" max="95" value="60" class="quality-slider" />
+          <span class="slider-label text-right">Best<br>Quality</span>
+        </div>
+        <div class="quality-presets">
+          <button class="preset-btn" data-value="20">Maximum</button>
+          <button class="preset-btn active" data-value="60">Balanced</button>
+          <button class="preset-btn" data-value="85">High Quality</button>
+        </div>
+      </div>
+
+      <div class="action-bar" id="actionBar" style="display:none">
+        <button class="btn btn-primary btn-lg btn-full" id="convertBtn">
+          <i data-feather="minimize-2"></i> Compress PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="processing-section" id="processingSection" style="display:none">
+      <div class="processing-animation">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring spinner-ring-2"></div>
+      </div>
+      <h3>Compressing PDF…</h3>
+      <p id="processingMsg">Optimizing your document, please wait.</p>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="result-section" id="resultSection" style="display:none">
+      <div class="result-icon success-icon"><i data-feather="check-circle"></i></div>
+      <h3>PDF Compressed!</h3>
+      <div class="result-stats" id="resultStats"></div>
+      <div class="compression-visual" id="compressionVisual"></div>
+      <div class="result-actions">
+        <a href="#" class="btn btn-primary btn-lg" id="downloadBtn">
+          <i data-feather="download"></i> Download Compressed PDF
+        </a>
+        <button class="btn btn-ghost btn-lg" id="convertAnother">
+          <i data-feather="refresh-cw"></i> Compress Another
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="how-it-works">
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>Upload your PDF</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">2</div><p>Set compression level</p></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><p>Download smaller PDF</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const CONVERT_URL = "{% url 'pdf_compressor_compress' %}";
+const DOWNLOAD_BASE = "{% url 'pdf_compressor_download' filename='__FILENAME__' %}";
+const CSRF_TOKEN = "{{ csrf_token }}";
+const TOOL_TYPE = "pdf-compressor";
+</script>
+{% endblock %}
