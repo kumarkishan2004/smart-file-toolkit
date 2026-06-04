@@ -176,3 +176,9 @@ Pillow==10.1.0         # Image processing
 pypdf==3.17.1          # PDF reading and manipulation
 reportlab==4.0.8       # PDF generation from images
 ```
+
+## License
+
+Copyright © 2026 Your Name. All rights reserved.
+
+This software and its documentation are proprietary and confidential. Unauthorized copying, modification, distribution, or use of this file, via any medium, is strictly prohibited.
